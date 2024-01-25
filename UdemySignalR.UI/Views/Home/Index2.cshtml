@@ -1,0 +1,22 @@
+﻿@section Scripts{
+
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+    <script type="text/javascript">
+
+        var connection = new signalR.HubConnectionBuilder().withUrl("/MyHub").build();
+
+        connection.start().then(() => {
+
+            console.log(connection.state);
+
+            connection.invoke("SendMessage","İlk Mesage geldimi Lan");
+        }).catch((err) => {
+            console.log(err);
+        });
+
+        connection.on("ReceiveMessage", (message) => {
+
+            console.log(message)
+        });
+    </script>
+}
